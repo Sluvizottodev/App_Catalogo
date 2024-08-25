@@ -34,7 +34,7 @@ class _InfAppBarState extends State<InfAppBar> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined), // Ícone home outlined
             label: 'Home',
-            activeIcon: Icon(Icons.home_filled), // Ícone home preenchido
+            activeIcon: Icon(Icons.home_rounded), // Ícone home preenchido
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.grid_view_outlined), // Ícone de Grid View
