@@ -32,13 +32,10 @@ class _TelaBuscaState extends State<TelaBusca> {
   @override
   Widget build(BuildContext context) {
     final filteredProducts = ProductData.products.where((product) {
-      return removeDiacritics(product.name.toLowerCase())
-          .contains(removeDiacritics(searchQuery.toLowerCase()));
-    }).toList();
-
-    final filteredCategories = categories.where((category) {
-      return removeDiacritics(category.toLowerCase())
-          .contains(removeDiacritics(searchQuery.toLowerCase()));
+      final query = removeDiacritics(searchQuery.toLowerCase());
+      return removeDiacritics(product.name.toLowerCase()).contains(query) ||
+          product.price.toString().contains(query) ||
+          categories.any((category) => removeDiacritics(category.toLowerCase()).contains(query));
     }).toList();
 
     return Scaffold(
@@ -71,7 +68,7 @@ class _TelaBuscaState extends State<TelaBusca> {
                       // Implementar ação do filtro aqui
                     },
                     child: Text('Filtro',
-                        style: TextStyle(color: TColors.textWhite )),
+                        style: TextStyle(color: TColors.textWhite , fontSize: 16)),
                   ),
                 ],
               ),
@@ -84,7 +81,6 @@ class _TelaBuscaState extends State<TelaBusca> {
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
         child: Column(
           children: [
-            // Exibir a quantidade de produtos encontrados
             if (searchQuery.isNotEmpty)
               Container(
                 alignment: Alignment.centerLeft,
